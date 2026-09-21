@@ -6,15 +6,12 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalar dependencias
-RUN npm ci
+RUN npm install
 
 # Copiar código fuente
 COPY src ./src
 COPY tsconfig.json .
 COPY drizzle.config.ts .
-
-# Compilar TypeScript
-RUN npm run build
 
 # Exponer puerto
 EXPOSE 3000
