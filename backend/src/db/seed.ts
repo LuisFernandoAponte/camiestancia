@@ -1,6 +1,6 @@
  import db from "./index.js"
 import { usuarios, bovinos, salud, reproduccion, finanzas } from "./schema.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { sql } from "drizzle-orm";
 
 /**

@@ -13,7 +13,7 @@ import "dotenv/config";
 import db from "./db/index.js";
 import { usuarios } from "./db/schema.js";
 import { eq } from "drizzle-orm";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const email = process.argv[2];
 const password = process.argv[3];

@@ -15,7 +15,7 @@ import {
   configuracion,
 } from "./schema.js";
 import { sql } from "drizzle-orm";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const FOTOS_TOROS = [
   "https://images.unsplash.com/photo-1546445317-29f4545f9d52?auto=format&fit=crop&w=1200&q=80",

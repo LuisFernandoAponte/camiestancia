@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import bcrypt from "bcryptjs";
 
 /**
  * Tests de Integración Completos - Backend La Estancia

@@ -3,7 +3,7 @@ import { setCookie, deleteCookie } from "hono/cookie";
 import db from "@/db/index.js";
 import { usuarios } from "@/db/schema.js";
 import { eq } from "drizzle-orm";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { generateToken, getCurrentUser, verifyToken } from "@/lib/jwt.js";
 import { authCookieOptions, AUTH_COOKIE, CSRF_COOKIE, csrfCookieOptions } from "@/lib/cookies.js";
