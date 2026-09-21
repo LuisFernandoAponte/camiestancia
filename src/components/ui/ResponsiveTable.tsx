@@ -48,9 +48,9 @@ export function ResponsiveTable<T>({
               className="w-full max-w-full min-w-0 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs space-y-2 text-xs"
             >
               {columns.map((col) => (
-                <div key={col.key} className="flex justify-between items-center py-1 border-b border-slate-100 last:border-0 min-w-0">
-                  <span className="font-semibold text-slate-500 shrink-0 pr-2">{col.header}</span>
-                  <span className="text-slate-900 font-medium truncate">{col.render(item)}</span>
+                <div key={col.key} className="flex justify-between items-center py-1.5 border-b border-slate-100 last:border-0 min-w-0 gap-2">
+                  <span className="font-semibold text-slate-500 shrink-0 text-xs">{col.header}</span>
+                  <div className="text-slate-900 font-medium text-xs flex items-center justify-end gap-1.5 min-w-0">{col.render(item)}</div>
                 </div>
               ))}
             </div>

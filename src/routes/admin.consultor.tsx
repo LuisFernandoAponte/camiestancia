@@ -167,33 +167,33 @@ function Consultor() {
         </div>
       </div>
 
-      {/* Tabs Principales */}
-      <div className="flex border-b border-slate-200 gap-2">
+      {/* Tabs */}
+      <div className="flex border-b border-slate-200 gap-2 overflow-x-auto scrollbar-none no-scrollbar pb-0.5">
         <button
           onClick={() => setActiveTab("alertas")}
-          className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === "alertas" ? "border-emerald-600 text-emerald-600" : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
-          <ShieldAlert className="size-4" /> Alertas & Estado del Hato ({visible.length})
+          <ShieldAlert className="size-4" /> Alertas & Diagnósticos ({visible.length})
         </button>
 
         <button
           onClick={() => setActiveTab("chat")}
-          className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === "chat" ? "border-emerald-600 text-emerald-600" : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
-          <Sparkles className="size-4 text-purple-600" /> Chat Zootécnico IA
+          <BrainCircuit className="size-4 text-purple-600" /> Asistente Zootécnico IA
         </button>
 
         <button
           onClick={() => setActiveTab("guias")}
-          className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === "guias" ? "border-emerald-600 text-emerald-600" : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
-          <FileText className="size-4" /> Guías & Protocolos SENASAG
+          <Lightbulb className="size-4 text-amber-600" /> Guías & Protocolos
         </button>
       </div>
 

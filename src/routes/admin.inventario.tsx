@@ -591,7 +591,7 @@ function Inventario() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-6 md:p-8 space-y-6 max-w-7xl mx-auto font-sans text-slate-900 antialiased">
+    <div className="min-h-screen bg-slate-50/50 p-3.5 sm:p-6 md:p-8 space-y-6 max-w-7xl mx-auto font-sans text-slate-900 antialiased">
       {/* Header Superior */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -605,7 +605,7 @@ function Inventario() {
 
         <button
           onClick={openCreate}
-          className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 text-xs font-semibold shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer self-start sm:self-auto"
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 text-xs font-semibold shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer w-full sm:w-auto min-h-[44px] sm:min-h-0"
         >
           <Plus className="size-4" />
           <span>Nuevo Bovino</span>
@@ -928,7 +928,7 @@ function Inventario() {
                 >
                   Estado {sortArrow("estado")}
                 </th>
-                <th className="px-4 py-3.5 text-right">Acciones</th>
+                <th className="px-4 py-3.5 text-right min-w-[140px]">Acciones</th>
               </tr>
             </thead>
 

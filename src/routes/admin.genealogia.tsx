@@ -41,11 +41,11 @@ function Genealogia() {
   const alertasArray: any[] = alertasParentesco && Array.isArray(alertasParentesco) ? alertasParentesco : [];
 
   return (
-    <div className="p-6 md:p-8 space-y-6">
+    <div className="w-full max-w-full min-w-0 overflow-x-hidden p-4 sm:p-6 md:p-8 space-y-6 font-sans text-slate-900 antialiased">
       <div>
-        <h1 className="font-display text-3xl">Genealogía</h1>
-        <p className="text-muted-foreground text-sm">
-          Árbol familiar: padres, madres, hijos y alertas de parentesco
+        <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight">Genealogía & Linaje Ganadero</h1>
+        <p className="text-slate-500 text-xs sm:text-sm">
+          Árbol familiar: padres, madres, descendencia y prevención de consanguinidad
         </p>
       </div>
 

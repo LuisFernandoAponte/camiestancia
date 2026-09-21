@@ -342,10 +342,10 @@ function Finanzas() {
           </div>
 
           {/* TAB BAR NAVEGABLE */}
-          <div className="flex border-b border-slate-200 gap-2">
+          <div className="flex border-b border-slate-200 gap-2 overflow-x-auto scrollbar-none no-scrollbar pb-0.5">
             <button
               onClick={() => setActiveTab("resumen")}
-              className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap shrink-0 ${
                 activeTab === "resumen"
                   ? "border-emerald-600 text-emerald-600"
                   : "border-transparent text-slate-500 hover:text-slate-900"
@@ -356,7 +356,7 @@ function Finanzas() {
 
             <button
               onClick={() => setActiveTab("pl")}
-              className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap shrink-0 ${
                 activeTab === "pl"
                   ? "border-emerald-600 text-emerald-600"
                   : "border-transparent text-slate-500 hover:text-slate-900"
@@ -367,7 +367,7 @@ function Finanzas() {
 
             <button
               onClick={() => setActiveTab("diario")}
-              className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold border-b-2 transition cursor-pointer whitespace-nowrap shrink-0 ${
                 activeTab === "diario"
                   ? "border-emerald-600 text-emerald-600"
                   : "border-transparent text-slate-500 hover:text-slate-900"

@@ -151,20 +151,20 @@ function Toros() {
   const modalBusy = createMutation.isPending || updateMutation.isPending;
 
   return (
-    <div className="p-6 md:p-8 space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
+    <div className="p-3.5 sm:p-6 md:p-8 space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-3xl">Toros</h1>
-          <p className="text-muted-foreground text-sm">
+          <h1 className="font-display text-2xl sm:text-3xl">Toros</h1>
+          <p className="text-muted-foreground text-xs sm:text-sm">
             Evaluación seminal, categorización y desempeño reproductivo
           </p>
         </div>
-        <button onClick={openCreate} className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-primary-foreground text-sm hover:bg-primary/90 cursor-pointer">
+        <button onClick={openCreate} className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-primary-foreground text-sm hover:bg-primary/90 cursor-pointer w-full sm:w-auto min-h-[44px] sm:min-h-0">
           <Plus className="size-4" /> Registrar toro
         </button>
       </div>
 
-      <div className="grid gap-3 grid-cols-4">
+      <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
         <div className="rounded-2xl border border-border bg-card p-4">
           <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
             <Swords className="size-3.5" /> Total toros

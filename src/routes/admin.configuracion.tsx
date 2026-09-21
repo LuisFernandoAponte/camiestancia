@@ -147,10 +147,10 @@ function ConfiguracionConsole() {
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-slate-200 gap-2 text-xs sm:text-sm font-semibold">
+      <div className="flex border-b border-slate-200 gap-2 text-xs sm:text-sm font-semibold overflow-x-auto scrollbar-none no-scrollbar pb-0.5">
         <button
           onClick={() => setActiveTab("estancia")}
-          className={`flex items-center gap-2 px-4 py-2.5 border-b-2 transition cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2.5 border-b-2 transition cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === "estancia" ? "border-emerald-600 text-emerald-600 font-bold" : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
@@ -159,7 +159,7 @@ function ConfiguracionConsole() {
 
         <button
           onClick={() => setActiveTab("umbrales")}
-          className={`flex items-center gap-2 px-4 py-2.5 border-b-2 transition cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2.5 border-b-2 transition cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === "umbrales" ? "border-emerald-600 text-emerald-600 font-bold" : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
@@ -168,7 +168,7 @@ function ConfiguracionConsole() {
 
         <button
           onClick={() => setActiveTab("interfaz")}
-          className={`flex items-center gap-2 px-4 py-2.5 border-b-2 transition cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2.5 border-b-2 transition cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === "interfaz" ? "border-emerald-600 text-emerald-600 font-bold" : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
@@ -177,7 +177,7 @@ function ConfiguracionConsole() {
 
         <button
           onClick={() => setActiveTab("seguridad")}
-          className={`flex items-center gap-2 px-4 py-2.5 border-b-2 transition cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2.5 border-b-2 transition cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === "seguridad" ? "border-emerald-600 text-emerald-600 font-bold" : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >

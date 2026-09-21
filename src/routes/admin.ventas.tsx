@@ -252,10 +252,10 @@ function VentasSuite() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-2xl border border-slate-200 text-xs font-semibold">
+        <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200 text-xs font-semibold overflow-x-auto max-w-full no-scrollbar scrollbar-none">
           <button
             onClick={() => setActiveTab("nueva")}
-            className={`px-3 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5 ${
+            className={`px-3 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
               activeTab === "nueva" ? "bg-white text-slate-900 shadow-xs font-bold" : "text-slate-500 hover:text-slate-900"
             }`}
           >
@@ -263,7 +263,7 @@ function VentasSuite() {
           </button>
           <button
             onClick={() => setActiveTab("historial")}
-            className={`px-3 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5 ${
+            className={`px-3 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
               activeTab === "historial" ? "bg-white text-slate-900 shadow-xs font-bold" : "text-slate-500 hover:text-slate-900"
             }`}
           >
@@ -271,7 +271,7 @@ function VentasSuite() {
           </button>
           <button
             onClick={() => setActiveTab("kpis")}
-            className={`px-3 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5 ${
+            className={`px-3 py-2 rounded-xl transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
               activeTab === "kpis" ? "bg-white text-slate-900 shadow-xs font-bold" : "text-slate-500 hover:text-slate-900"
             }`}
           >

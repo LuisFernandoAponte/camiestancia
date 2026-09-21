@@ -192,11 +192,11 @@ function Insumos() {
     tiposInsumo.find((t) => t.value === tipo);
 
   return (
-    <div className="min-h-screen bg-slate-50/50 p-6 md:p-8 space-y-6 max-w-7xl mx-auto font-sans text-slate-900 antialiased">
-      {/* Toast Alert */}
+    <div className="min-h-screen bg-slate-50/50 p-3.5 sm:p-6 md:p-8 space-y-6 max-w-7xl mx-auto font-sans text-slate-900 antialiased">
+      {/* Toast Feedback */}
       {toast && (
         <div
-          className={`fixed top-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg text-xs font-semibold ${
+          className={`fixed bottom-5 right-5 z-50 rounded-xl px-4 py-3 text-xs font-semibold shadow-lg flex items-center gap-2 transition-all ${
             toast.type === "success"
               ? "bg-emerald-600 text-white"
               : "bg-rose-600 text-white"
@@ -227,17 +227,17 @@ function Insumos() {
             Inventario de vacunas, desparasitantes, medicamentos y herramientas
           </p>
         </div>
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 w-full sm:w-auto">
           <button
             onClick={() => refetch()}
-            className="h-10 w-10 grid place-items-center rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 shadow-sm transition cursor-pointer"
+            className="h-10 w-10 grid place-items-center rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 shadow-sm transition cursor-pointer shrink-0"
             title="Actualizar"
           >
             <RotateCw className="size-4" />
           </button>
           <button
             onClick={openCreate}
-            className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 h-10 text-xs font-semibold shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 h-10 text-xs font-semibold shadow-sm transition-all duration-150 active:scale-[0.98] cursor-pointer min-h-[44px] sm:min-h-0"
           >
             <Plus className="size-4" /> Nuevo Insumo
           </button>

@@ -237,15 +237,15 @@ function Reproduccion() {
   const modalBusy = createMutation.isPending || updateMutation.isPending;
 
   return (
-    <div className="p-6 md:p-8 space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
+    <div className="p-3.5 sm:p-6 md:p-8 space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-3xl">Reproducción</h1>
-          <p className="text-muted-foreground text-sm">
+          <h1 className="font-display text-2xl sm:text-3xl">Reproducción</h1>
+          <p className="text-muted-foreground text-xs sm:text-sm">
             IATF: Inseminación Artificial a Tiempo Fijo · Ciclos 1°, 3°, 4°
           </p>
         </div>
-        <button onClick={openCreate} className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-primary-foreground text-sm hover:bg-primary/90 cursor-pointer">
+        <button onClick={openCreate} className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-primary-foreground text-sm hover:bg-primary/90 cursor-pointer w-full sm:w-auto min-h-[44px] sm:min-h-0">
           <Plus className="size-4" /> Nueva IATF
         </button>
       </div>
