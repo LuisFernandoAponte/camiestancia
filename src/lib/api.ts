@@ -1,11 +1,18 @@
 const DEFAULT_PROD_URL = "https://guayaba-backend-83oa.onrender.com";
-const rawEnvUrl = import.meta.env.VITE_API_URL;
-const API_BASE_URL =
-  rawEnvUrl && rawEnvUrl !== "undefined" && rawEnvUrl.trim().length > 0
-    ? rawEnvUrl.trim()
-    : import.meta.env.PROD
-      ? DEFAULT_PROD_URL
-      : "http://localhost:3000";
+
+export function getApiBaseUrl(): string {
+  const raw = import.meta.env.VITE_API_URL;
+  if (!raw || raw === "undefined" || raw.trim().length === 0) {
+    return import.meta.env.PROD ? DEFAULT_PROD_URL : "http://localhost:3000";
+  }
+  const clean = raw.trim();
+  if (clean.includes("guayaba-backend.onrender.com") && !clean.includes("guayaba-backend-83oa")) {
+    return DEFAULT_PROD_URL;
+  }
+  return clean;
+}
+
+const API_BASE_URL = getApiBaseUrl();
 
 export interface ApiResponse<T = any> {
   success: boolean;
@@ -51,7 +58,8 @@ export async function apiRequest<T = any>(
     }
   }
 
-  const url = `${API_BASE_URL}${endpoint}`;
+  const baseUrl = getApiBaseUrl();
+  const url = `${baseUrl}${endpoint}`;
 
   try {
     const response = await fetch(url, {
@@ -61,11 +69,6 @@ export async function apiRequest<T = any>(
     });
 
     const data: ApiResponse<T> = await response.json();
-
-    if (!response.ok) {
-      return data;
-    }
-
     return data;
   } catch (error) {
     throw error;
@@ -74,7 +77,8 @@ export async function apiRequest<T = any>(
 
 export async function fetchCsrfToken(): Promise<void> {
   try {
-    await fetch(`${API_BASE_URL}/api/auth/csrf`, { credentials: "include" });
+    const baseUrl = getApiBaseUrl();
+    await fetch(`${baseUrl}/api/auth/csrf`, { credentials: "include" });
   } catch {
   }
 }

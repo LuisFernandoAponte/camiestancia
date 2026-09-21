@@ -5,7 +5,7 @@ import { Search, Loader2, Sparkles, Filter, MessageCircle, Scale, Tag, ExternalL
 import bullPortrait from "@/assets/bull-portrait.jpg";
 import calvesImg from "@/assets/calves.jpg";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+import { API_BASE_URL as API_BASE } from "@/lib/api.js";
 
 interface CatalogoBovino {
   id: string;
