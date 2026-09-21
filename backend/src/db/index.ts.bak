@@ -1,0 +1,40 @@
+import { drizzle } from "drizzle-orm/node-postgres";
+import pkg from "pg";
+import * as schema from "./schema.js";
+
+const { Pool } = pkg;
+
+/**
+ * Configuración de la conexión a PostgreSQL con Drizzle ORM
+ */
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+  console.error("\n❌ ERROR: DATABASE_URL environment variable is not set");
+  console.error("\n📋 Por favor configura:");
+  console.error("   1. Crea archivo /backend/.env");
+  console.error("   2. Añade: DATABASE_URL=\"postgresql://...\"");
+  console.error("   3. Reinicia el servidor\n");
+  console.error("📖 Ver .env.example para plantilla");
+  console.error("🔗 Documentación: backend/SETUP.md\n");
+  process.exit(1);
+}
+
+try {
+  const pool = new Pool({
+    connectionString,
+  });
+
+  /**
+   * Instancia de Drizzle ORM configurada
+   */
+  export const db = drizzle(pool, {
+    schema,
+    logger: process.env.NODE_ENV === "development",
+  });
+
+  export default db;
+} catch (error) {
+  console.error("❌ Error connecting to database:", error);
+  process.exit(1);
+}

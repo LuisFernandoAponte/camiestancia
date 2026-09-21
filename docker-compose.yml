@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: laestancia_guayaba
+      POSTGRES_USER: estancia_admin
+      POSTGRES_PASSWORD: AdminDB2026!
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U estancia_admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: "postgresql://estancia_admin:AdminDB2026!@postgres:5432/laestancia_guayaba"
+      JWT_SECRET: "tu_secret_super_seguro_2026"
+      PORT: 3000
+      NODE_ENV: "production"
+      FRONTEND_URL: "http://localhost:5173"
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend/src:/app/src
+
+volumes:
+  postgres_data:

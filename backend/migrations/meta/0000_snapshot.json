@@ -1,0 +1,1996 @@
+{
+  "id": "6513908b-48cb-4dac-b239-ab0485386a87",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.bovinos": {
+      "name": "bovinos",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "chip": {
+          "name": "chip",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "numero_identificacion": {
+          "name": "numero_identificacion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raza": {
+          "name": "raza",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sexo": {
+          "name": "sexo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "color": {
+          "name": "color",
+          "type": "color_bovino",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_bovino",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nacimiento": {
+          "name": "nacimiento",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "peso_inicial": {
+          "name": "peso_inicial",
+          "type": "numeric(6, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "peso_actual": {
+          "name": "peso_actual",
+          "type": "numeric(6, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "potrero": {
+          "name": "potrero",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "madre_id": {
+          "name": "madre_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "padre_id": {
+          "name": "padre_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estado": {
+          "name": "estado",
+          "type": "estado_bovino",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'activo'"
+        },
+        "descartado": {
+          "name": "descartado",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "motivo_descarte": {
+          "name": "motivo_descarte",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "precio": {
+          "name": "precio",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'0'"
+        },
+        "foto": {
+          "name": "foto",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_bovinos_chip": {
+          "name": "idx_bovinos_chip",
+          "columns": [
+            {
+              "expression": "chip",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_bovinos_estado": {
+          "name": "idx_bovinos_estado",
+          "columns": [
+            {
+              "expression": "estado",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_bovinos_madre": {
+          "name": "idx_bovinos_madre",
+          "columns": [
+            {
+              "expression": "madre_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_bovinos_padre": {
+          "name": "idx_bovinos_padre",
+          "columns": [
+            {
+              "expression": "padre_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_bovinos_tipo": {
+          "name": "idx_bovinos_tipo",
+          "columns": [
+            {
+              "expression": "tipo",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "bovinos_madre_id_bovinos_id_fk": {
+          "name": "bovinos_madre_id_bovinos_id_fk",
+          "tableFrom": "bovinos",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "madre_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "bovinos_padre_id_bovinos_id_fk": {
+          "name": "bovinos_padre_id_bovinos_id_fk",
+          "tableFrom": "bovinos",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "padre_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "bovinos_chip_unique": {
+          "name": "bovinos_chip_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "chip"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.configuracion": {
+      "name": "configuracion",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "clave": {
+          "name": "clave",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "valor": {
+          "name": "valor",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'text'"
+        },
+        "descripcion": {
+          "name": "descripcion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "grupo": {
+          "name": "grupo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'general'"
+        },
+        "opciones": {
+          "name": "opciones",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "editable": {
+          "name": "editable",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "orden": {
+          "name": "orden",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_config_clave": {
+          "name": "idx_config_clave",
+          "columns": [
+            {
+              "expression": "clave",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_config_grupo": {
+          "name": "idx_config_grupo",
+          "columns": [
+            {
+              "expression": "grupo",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "configuracion_clave_unique": {
+          "name": "configuracion_clave_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "clave"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.consultor_reglas": {
+      "name": "consultor_reglas",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "categoria": {
+          "name": "categoria",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prioridad": {
+          "name": "prioridad",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "condicion_sql": {
+          "name": "condicion_sql",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mensaje_alerta": {
+          "name": "mensaje_alerta",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "recomendacion": {
+          "name": "recomendacion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "activo": {
+          "name": "activo",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 1
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.diagnosticos": {
+      "name": "diagnosticos",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "animal_id": {
+          "name": "animal_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reproduccion_id": {
+          "name": "reproduccion_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_diagnostico": {
+          "name": "fecha_diagnostico",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo_diagnostico": {
+          "name": "tipo_diagnostico",
+          "type": "tipo_diagnostico",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "resultado": {
+          "name": "resultado",
+          "type": "resultado_diagnostico",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "edad_gestacional_dias": {
+          "name": "edad_gestacional_dias",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "observaciones": {
+          "name": "observaciones",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_diagnosticos_animal": {
+          "name": "idx_diagnosticos_animal",
+          "columns": [
+            {
+              "expression": "animal_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "diagnosticos_animal_id_bovinos_id_fk": {
+          "name": "diagnosticos_animal_id_bovinos_id_fk",
+          "tableFrom": "diagnosticos",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "animal_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "diagnosticos_reproduccion_id_reproduccion_id_fk": {
+          "name": "diagnosticos_reproduccion_id_reproduccion_id_fk",
+          "tableFrom": "diagnosticos",
+          "tableTo": "reproduccion",
+          "columnsFrom": [
+            "reproduccion_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.eventos_reproductivos": {
+      "name": "eventos_reproductivos",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "animal_id": {
+          "name": "animal_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fecha_evento": {
+          "name": "fecha_evento",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo_evento": {
+          "name": "tipo_evento",
+          "type": "tipo_evento_reproductivo",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "toro_id": {
+          "name": "toro_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "descripcion": {
+          "name": "descripcion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "resultado": {
+          "name": "resultado",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "observaciones": {
+          "name": "observaciones",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_eventos_animal": {
+          "name": "idx_eventos_animal",
+          "columns": [
+            {
+              "expression": "animal_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "eventos_reproductivos_animal_id_bovinos_id_fk": {
+          "name": "eventos_reproductivos_animal_id_bovinos_id_fk",
+          "tableFrom": "eventos_reproductivos",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "animal_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "eventos_reproductivos_toro_id_bovinos_id_fk": {
+          "name": "eventos_reproductivos_toro_id_bovinos_id_fk",
+          "tableFrom": "eventos_reproductivos",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "toro_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.finanzas": {
+      "name": "finanzas",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "lote": {
+          "name": "lote",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mes": {
+          "name": "mes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "anio": {
+          "name": "anio",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ingresos": {
+          "name": "ingresos",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'0'"
+        },
+        "egresos": {
+          "name": "egresos",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'0'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_finanzas_unique_lote_mes_anio": {
+          "name": "idx_finanzas_unique_lote_mes_anio",
+          "columns": [
+            {
+              "expression": "lote",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "mes",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "anio",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.gastos": {
+      "name": "gastos",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "lote": {
+          "name": "lote",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mes": {
+          "name": "mes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "anio": {
+          "name": "anio",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "categoria": {
+          "name": "categoria",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "descripcion": {
+          "name": "descripcion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "monto": {
+          "name": "monto",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.insumos": {
+      "name": "insumos",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_insumo",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "presentacion": {
+          "name": "presentacion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stock_actual": {
+          "name": "stock_actual",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
+        "stock_minimo": {
+          "name": "stock_minimo",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
+        "unidad": {
+          "name": "unidad",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'unidad'"
+        },
+        "lote": {
+          "name": "lote",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_compra": {
+          "name": "fecha_compra",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_vencimiento": {
+          "name": "fecha_vencimiento",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "proveedor": {
+          "name": "proveedor",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "costo_unitario": {
+          "name": "costo_unitario",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'0'"
+        },
+        "notas": {
+          "name": "notas",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_insumos_tipo": {
+          "name": "idx_insumos_tipo",
+          "columns": [
+            {
+              "expression": "tipo",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_insumos_vencimiento": {
+          "name": "idx_insumos_vencimiento",
+          "columns": [
+            {
+              "expression": "fecha_vencimiento",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_insumos_stock": {
+          "name": "idx_insumos_stock",
+          "columns": [
+            {
+              "expression": "stock_actual",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.reproduccion": {
+      "name": "reproduccion",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "hembra_id": {
+          "name": "hembra_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "toro_id": {
+          "name": "toro_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "padre_id": {
+          "name": "padre_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_inseminacion": {
+          "name": "fecha_inseminacion",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ciclo_numero": {
+          "name": "ciclo_numero",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 1
+        },
+        "resultado": {
+          "name": "resultado",
+          "type": "resultado_iatf",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'pendiente'"
+        },
+        "tipo_servicio": {
+          "name": "tipo_servicio",
+          "type": "tipo_servicio",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'iatf'"
+        },
+        "dias_gestacion": {
+          "name": "dias_gestacion",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parto_estimado": {
+          "name": "parto_estimado",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_diagnostico": {
+          "name": "fecha_diagnostico",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estado": {
+          "name": "estado",
+          "type": "estado_reproduccion",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'confirmada'"
+        },
+        "observaciones": {
+          "name": "observaciones",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_reproduccion_hembra": {
+          "name": "idx_reproduccion_hembra",
+          "columns": [
+            {
+              "expression": "hembra_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_reproduccion_ciclo": {
+          "name": "idx_reproduccion_ciclo",
+          "columns": [
+            {
+              "expression": "ciclo_numero",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_reproduccion_resultado": {
+          "name": "idx_reproduccion_resultado",
+          "columns": [
+            {
+              "expression": "resultado",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "reproduccion_hembra_id_bovinos_id_fk": {
+          "name": "reproduccion_hembra_id_bovinos_id_fk",
+          "tableFrom": "reproduccion",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "hembra_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "reproduccion_toro_id_bovinos_id_fk": {
+          "name": "reproduccion_toro_id_bovinos_id_fk",
+          "tableFrom": "reproduccion",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "toro_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "reproduccion_padre_id_bovinos_id_fk": {
+          "name": "reproduccion_padre_id_bovinos_id_fk",
+          "tableFrom": "reproduccion",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "padre_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.salud": {
+      "name": "salud",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "animal_id": {
+          "name": "animal_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_salud",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fecha": {
+          "name": "fecha",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "proxima_fecha": {
+          "name": "proxima_fecha",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "veterinario": {
+          "name": "veterinario",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estado": {
+          "name": "estado",
+          "type": "estado_salud",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'pendiente'"
+        },
+        "notas": {
+          "name": "notas",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_salud_animal_id": {
+          "name": "idx_salud_animal_id",
+          "columns": [
+            {
+              "expression": "animal_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "salud_animal_id_bovinos_id_fk": {
+          "name": "salud_animal_id_bovinos_id_fk",
+          "tableFrom": "salud",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "animal_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.toros": {
+      "name": "toros",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "bovino_id": {
+          "name": "bovino_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "codigo": {
+          "name": "codigo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raza": {
+          "name": "raza",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_nacimiento": {
+          "name": "fecha_nacimiento",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_evaluacion": {
+          "name": "fecha_evaluacion",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "peso_evaluacion": {
+          "name": "peso_evaluacion",
+          "type": "numeric(6, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "circunferencia_escrotal": {
+          "name": "circunferencia_escrotal",
+          "type": "numeric(5, 1)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "calidad_seminal": {
+          "name": "calidad_seminal",
+          "type": "calidad_seminal",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "categoria": {
+          "name": "categoria",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "activo": {
+          "name": "activo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "descartado": {
+          "name": "descartado",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "motivo_descarte": {
+          "name": "motivo_descarte",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "observaciones": {
+          "name": "observaciones",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_toros_activo": {
+          "name": "idx_toros_activo",
+          "columns": [
+            {
+              "expression": "activo",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "toros_bovino_id_bovinos_id_fk": {
+          "name": "toros_bovino_id_bovinos_id_fk",
+          "tableFrom": "toros",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "bovino_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "toros_bovino_id_unique": {
+          "name": "toros_bovino_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "bovino_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.usuarios": {
+      "name": "usuarios",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "password_hash": {
+          "name": "password_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rol": {
+          "name": "rol",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'gestor'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_usuarios_email": {
+          "name": "idx_usuarios_email",
+          "columns": [
+            {
+              "expression": "email",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "usuarios_email_unique": {
+          "name": "usuarios_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.vaquillas": {
+      "name": "vaquillas",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "bovino_id": {
+          "name": "bovino_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tat": {
+          "name": "tat",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_nacimiento": {
+          "name": "fecha_nacimiento",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "padre_id": {
+          "name": "padre_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "madre_id": {
+          "name": "madre_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "color": {
+          "name": "color",
+          "type": "color_bovino",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "numero_lote": {
+          "name": "numero_lote",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "observaciones": {
+          "name": "observaciones",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estado": {
+          "name": "estado",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "vaquillas_bovino_id_bovinos_id_fk": {
+          "name": "vaquillas_bovino_id_bovinos_id_fk",
+          "tableFrom": "vaquillas",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "bovino_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "vaquillas_padre_id_bovinos_id_fk": {
+          "name": "vaquillas_padre_id_bovinos_id_fk",
+          "tableFrom": "vaquillas",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "padre_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "vaquillas_madre_id_bovinos_id_fk": {
+          "name": "vaquillas_madre_id_bovinos_id_fk",
+          "tableFrom": "vaquillas",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "madre_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "vaquillas_bovino_id_unique": {
+          "name": "vaquillas_bovino_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "bovino_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ventas": {
+      "name": "ventas",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "idempotency_key": {
+          "name": "idempotency_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "animal_id": {
+          "name": "animal_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "comprador_nombre": {
+          "name": "comprador_nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "comprador_documento": {
+          "name": "comprador_documento",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "comprador_telefono": {
+          "name": "comprador_telefono",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "comprador_email": {
+          "name": "comprador_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "comprador_finca": {
+          "name": "comprador_finca",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fecha_venta": {
+          "name": "fecha_venta",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "precio_venta": {
+          "name": "precio_venta",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "metodo_pago": {
+          "name": "metodo_pago",
+          "type": "metodo_pago",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "estado_pago": {
+          "name": "estado_pago",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'pendiente'"
+        },
+        "referencia_contrato": {
+          "name": "referencia_contrato",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "notas": {
+          "name": "notas",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "creado_por": {
+          "name": "creado_por",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_ventas_idempotency_key": {
+          "name": "idx_ventas_idempotency_key",
+          "columns": [
+            {
+              "expression": "idempotency_key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "idx_ventas_animal_id": {
+          "name": "idx_ventas_animal_id",
+          "columns": [
+            {
+              "expression": "animal_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "ventas_animal_id_bovinos_id_fk": {
+          "name": "ventas_animal_id_bovinos_id_fk",
+          "tableFrom": "ventas",
+          "tableTo": "bovinos",
+          "columnsFrom": [
+            "animal_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "ventas_creado_por_usuarios_id_fk": {
+          "name": "ventas_creado_por_usuarios_id_fk",
+          "tableFrom": "ventas",
+          "tableTo": "usuarios",
+          "columnsFrom": [
+            "creado_por"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "ventas_idempotency_key_unique": {
+          "name": "ventas_idempotency_key_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "idempotency_key"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.calidad_seminal": {
+      "name": "calidad_seminal",
+      "schema": "public",
+      "values": [
+        "A",
+        "S",
+        "E",
+        "B"
+      ]
+    },
+    "public.color_bovino": {
+      "name": "color_bovino",
+      "schema": "public",
+      "values": [
+        "BC",
+        "CL",
+        "CO",
+        "OV",
+        "NE",
+        "BR",
+        "OT"
+      ]
+    },
+    "public.estado_bovino": {
+      "name": "estado_bovino",
+      "schema": "public",
+      "values": [
+        "activo",
+        "disponible",
+        "vendido",
+        "cuarentena",
+        "preñez",
+        "fallecido"
+      ]
+    },
+    "public.estado_reproduccion": {
+      "name": "estado_reproduccion",
+      "schema": "public",
+      "values": [
+        "confirmada",
+        "evaluacion",
+        "aborto",
+        "parto_realizado",
+        "descartada"
+      ]
+    },
+    "public.estado_salud": {
+      "name": "estado_salud",
+      "schema": "public",
+      "values": [
+        "pendiente",
+        "aplicado",
+        "cancelado",
+        "reprogramado"
+      ]
+    },
+    "public.metodo_pago": {
+      "name": "metodo_pago",
+      "schema": "public",
+      "values": [
+        "efectivo",
+        "transferencia",
+        "cheque",
+        "letra",
+        "qr"
+      ]
+    },
+    "public.resultado_diagnostico": {
+      "name": "resultado_diagnostico",
+      "schema": "public",
+      "values": [
+        "preñada",
+        "vacia",
+        "aborto",
+        "no_confirmado"
+      ]
+    },
+    "public.resultado_iatf": {
+      "name": "resultado_iatf",
+      "schema": "public",
+      "values": [
+        "positivo",
+        "negativo",
+        "pendiente"
+      ]
+    },
+    "public.tipo_bovino": {
+      "name": "tipo_bovino",
+      "schema": "public",
+      "values": [
+        "vaca",
+        "vaquilla",
+        "toro",
+        "novillo",
+        "ternero",
+        "ternera"
+      ]
+    },
+    "public.tipo_diagnostico": {
+      "name": "tipo_diagnostico",
+      "schema": "public",
+      "values": [
+        "tacto",
+        "ecografia"
+      ]
+    },
+    "public.tipo_evento_reproductivo": {
+      "name": "tipo_evento_reproductivo",
+      "schema": "public",
+      "values": [
+        "servicio_natural",
+        "iatf",
+        "parto",
+        "destete",
+        "aborto",
+        "diagnostico"
+      ]
+    },
+    "public.tipo_insumo": {
+      "name": "tipo_insumo",
+      "schema": "public",
+      "values": [
+        "vacuna",
+        "desparasitante",
+        "antibiotico",
+        "antiinflamatorio",
+        "vitamina",
+        "suplemento",
+        "herramienta",
+        "otro"
+      ]
+    },
+    "public.tipo_salud": {
+      "name": "tipo_salud",
+      "schema": "public",
+      "values": [
+        "vacuna",
+        "desparasitacion",
+        "chequeo",
+        "tratamiento"
+      ]
+    },
+    "public.tipo_servicio": {
+      "name": "tipo_servicio",
+      "schema": "public",
+      "values": [
+        "iatf",
+        "servicio_natural",
+        "transferencia_embrion"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

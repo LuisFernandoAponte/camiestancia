@@ -1,0 +1,71 @@
+-- Create the consultor_reglas table if it doesn't exist
+CREATE TABLE IF NOT EXISTS consultor_reglas (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  categoria TEXT NOT NULL,
+  prioridad TEXT NOT NULL,
+  condicion_sql TEXT NOT NULL,
+  mensaje_alerta TEXT NOT NULL,
+  recomendacion TEXT,
+  activo INTEGER DEFAULT 1,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Delete existing rules and re-insert
+DELETE FROM consultor_reglas;
+
+INSERT INTO consultor_reglas (categoria, prioridad, condicion_sql, mensaje_alerta, recomendacion) VALUES
+('salud', 'alta',
+ 'SELECT 1 FROM salud s WHERE s.tipo = ''vacuna'' AND s.estado = ''pendiente'' AND s.proxima_fecha <= CURRENT_DATE + 7',
+ '⚠️ Vacuna pendiente en 7 días',
+ 'Programar aplicación de vacuna contra aftosa o carbunclo según calendario SENASAG.'),
+
+('salud', 'alta',
+ 'SELECT 1 FROM bovinos b WHERE b.potrero ILIKE ''%humedo%'' AND b.estado = ''activo'' AND EXTRACT(MONTH FROM CURRENT_DATE) IN (12,1,2,3)',
+ '🌧️ Riesgo de parasitosis en época de lluvias',
+ 'Aplicar desparasitante estratégico (Ivermectina + Albendazol) y rotar potreros.'),
+
+('reproduccion', 'alta',
+ 'SELECT 1 FROM reproduccion r WHERE r.dias_gestacion > 270 AND r.estado IN (''confirmada'', ''evaluacion'')',
+ '🐮 Parto inminente (≥270 días)',
+ 'Monitorear signos de parto: inquietud, ubre llena, separación del hato. Tener kit de asistencia listo.'),
+
+('reproduccion', 'media',
+ 'SELECT 1 FROM reproduccion r WHERE r.fecha_inseminacion IS NOT NULL AND r.estado = ''confirmada'' AND CURRENT_DATE - r.fecha_inseminacion > 45 AND NOT EXISTS (SELECT 1 FROM salud s WHERE s.animal_id = r.hembra_id AND s.tipo = ''chequeo'' AND s.fecha > r.fecha_inseminacion + 30)',
+ '🔍 Sin diagnóstico de preñez post-inseminación',
+ 'Programar ecografía o tacto rectal para confirmar preñez y descartar embriones tempranos.'),
+
+('nutricion', 'media',
+ 'SELECT 1 FROM bovinos b WHERE b.peso_actual IS NOT NULL AND b.peso_inicial IS NOT NULL AND b.peso_actual < b.peso_inicial * 0.95 AND b.estado = ''activo''',
+ '📉 Pérdida de peso detectada',
+ 'Revisar calidad de forraje, suplementar con sales mineralizadas y evaluar carga animal por hectárea.'),
+
+('clima', 'baja',
+ 'SELECT 1 FROM bovinos b WHERE b.potrero ILIKE '%norte%' AND EXTRACT(MONTH FROM CURRENT_DATE) IN (9,10,11)',
+ '☀️ Época seca: riesgo de estrés calórico',
+ 'Asegurar sombra natural/artificial y acceso permanente a agua limpia. Evitar manejo en horas pico de calor.'),
+
+-- IATF Rules
+('reproduccion', 'alta',
+ 'SELECT 1 FROM reproduccion r WHERE r.tipo_servicio = ''iatf'' AND r.resultado = ''negativo'' AND r.ciclo_numero >= 3',
+ '🚨 Vaca con ≥3 IATF negativas: evaluar descarte',
+ 'Evaluar condición corporal, realizar examen ginecológico y considerar descarte si no hay preñez después de 3 servicios.'),
+
+('reproduccion', 'alta',
+ 'SELECT 1 FROM reproduccion r WHERE r.tipo_servicio = ''iatf'' AND r.resultado = ''positivo'' AND r.fecha_diagnostico IS NULL AND CURRENT_DATE - r.fecha_inseminacion > 45',
+ '🔍 IATF positiva sin diagnóstico confirmatorio',
+ 'Realizar ecografía o tacto rectal para confirmar gestación. Si ya pasaron 45+ días, programar diagnóstico urgente.'),
+
+('reproduccion', 'alta',
+ 'SELECT 1 FROM toros t WHERE t.descartado = true AND t.bovino_id IN (SELECT toro_id FROM reproduccion WHERE fecha_inseminacion >= CURRENT_DATE - 180)',
+ '🐂 Toro descartado utilizado en servicios recientes',
+ 'El toro marcado como descartado tiene servicios en los últimos 6 meses. Verifique y desactive su uso en el programa reproductivo.'),
+
+('reproduccion', 'media',
+ 'SELECT 1 FROM bovinos b WHERE b.sexo = ''Hembra'' AND b.estado = ''activo'' AND b.descartado = false AND b.id NOT IN (SELECT hembra_id FROM reproduccion WHERE tipo_servicio = ''iatf'') AND b.nacimiento IS NOT NULL AND CURRENT_DATE - b.nacimiento > 730',
+ '🐮 Hembra adulta sin IATF registrada',
+ 'Hay hembras mayores de 2 años sin registro de inseminación. Detecte celo e incorpórelas al programa IATF.'),
+
+('reproduccion', 'media',
+ 'SELECT 1 FROM reproduccion r JOIN bovinos b ON b.id = r.hembra_id WHERE r.tipo_servicio = ''iatf'' AND r.resultado = ''negativo'' AND r.ciclo_numero >= 3 GROUP BY r.hembra_id, b.nombre HAVING COUNT(*) >= 3',
+ '⚠️ Límite de IATF alcanzado: evaluar próxima temporada',
+ 'Algunas vacas alcanzaron el máximo de IATF sin preñez. Evalúe condición corporal, salud uterina y decida descarte o nuevo protocolo.');
