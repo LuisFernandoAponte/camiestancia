@@ -29,6 +29,13 @@ const htmlContent = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hacienda Guayaba Lorente - Ganadería de Alta Genética</title>
+    <script>
+      window.$_TSR = window.$_TSR || {
+        buffer: [],
+        initialized: true,
+        router: { matches: [], lastMatchId: null, manifest: { routes: {} }, dehydratedData: {} }
+      };
+    </script>
     <link rel="stylesheet" href="/assets/${cssFile}">
 </head>
 <body class="bg-gray-50 text-gray-900 antialiased">
@@ -38,4 +45,4 @@ const htmlContent = `<!DOCTYPE html>
 </html>`;
 
 fs.writeFileSync(path.join(clientDir, 'index.html'), htmlContent, 'utf8');
-console.log('Successfully generated dist/client/index.html with', { cssFile, jsFile });
+console.log('Successfully generated dist/client/index.html with $_TSR hydration mock', { cssFile, jsFile });
