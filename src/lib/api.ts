@@ -1,4 +1,11 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const DEFAULT_PROD_URL = "https://guayaba-backend-83oa.onrender.com";
+const rawEnvUrl = import.meta.env.VITE_API_URL;
+const API_BASE_URL =
+  rawEnvUrl && rawEnvUrl !== "undefined" && rawEnvUrl.trim().length > 0
+    ? rawEnvUrl.trim()
+    : import.meta.env.PROD
+      ? DEFAULT_PROD_URL
+      : "http://localhost:3000";
 
 export interface ApiResponse<T = any> {
   success: boolean;

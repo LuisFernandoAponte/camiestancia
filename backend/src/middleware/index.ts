@@ -101,28 +101,14 @@ export function requireRole(...roles: string[]) {
 }
 
 /**
- * Middleware de CORS - permite múltiples orígenes
+ * Middleware de CORS - permite orígenes dinámicos (Vercel, localhost, etc.)
  */
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:8080",
-  "http://localhost:8081",
-  "http://localhost:3000",
-  "http://127.0.0.1:5173",
-  "http://127.0.0.1:8080",
-  "http://127.0.0.1:8081",
-  process.env.FRONTEND_URL,
-].filter((x): x is string => !!x);
-
-const uniqueOrigins = [...new Set(allowedOrigins)];
-
 export const corsMiddleware = createMiddleware(async (c, next) => {
-  const origin = c.req.header("origin") || "";
-  const allowed = uniqueOrigins.includes(origin) ? origin : uniqueOrigins[0] || "";
+  const origin = c.req.header("origin") || "*";
 
-  c.header("Access-Control-Allow-Origin", allowed);
-  c.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  c.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-CSRF-Token");
+  c.header("Access-Control-Allow-Origin", origin);
+  c.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+  c.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-CSRF-Token, X-Requested-With");
   c.header("Access-Control-Allow-Credentials", "true");
   c.header("Vary", "Origin");
 
