@@ -1,10 +1,12 @@
 import ReactDOM from "react-dom/client";
-import { StartClient } from "@tanstack/react-start";
+import { RouterProvider } from "@tanstack/react-router";
 import { getRouter } from "./router";
 
 const router = getRouter();
 
-ReactDOM.hydrateRoot(
-  document.getElementById("root")!,
-  <StartClient router={router} />
-);
+const rootElement = document.getElementById("root");
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(<RouterProvider router={router} />);
+}
+
