@@ -61,8 +61,9 @@ export async function errorHandler(error: Error, c: Context) {
     {
       success: false,
       error: {
-        message: "Error interno del servidor",
+        message: `Error interno del servidor: ${error?.message || String(error)}`,
         code: "INTERNAL_ERROR",
+        details: error?.stack,
       },
     },
     500,
