@@ -167,14 +167,15 @@ app.notFound((c) =>
 // STARTUP
 // ============================================================================
 
-const port = parseInt(process.env.PORT || "3000");
+const port = parseInt(process.env.PORT || "3000", 10);
 
 serve(
-  { fetch: app.fetch, port },
+  { fetch: app.fetch, port, hostname: "0.0.0.0" },
   (info) => {
     logger.info(`[INICIO] Backend La Estancia corriendo en puerto ${info.port}`);
-    logger.info(`[DOCS]  Swagger: http://localhost:${info.port}/api/docs`);
+    logger.info(`[DOCS]  Swagger: http://0.0.0.0:${info.port}/api/docs`);
     logger.info(`[JWT]   ${process.env.JWT_SECRET ? "OK - Configurado" : "ERROR - NO CONFIGURADO"}`);
     logger.info(`[DB]    ${process.env.DATABASE_URL ? "OK - Base de datos conectada" : "ERROR - NO CONFIGURADA"}`);
   },
 );
+
