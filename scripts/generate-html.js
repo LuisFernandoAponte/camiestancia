@@ -35,6 +35,12 @@ const htmlContent = `<!DOCTYPE html>
       window.$_TSR.h = window.$_TSR.h || function(data) { (window.$_TSR.buffer = window.$_TSR.buffer || []).push(data); };
       window.$_TSR.clean = window.$_TSR.clean || function() {};
       window.$_TSR.initialized = true;
+      window.$_TSR.router = window.$_TSR.router || {
+        matches: [],
+        lastMatchId: null,
+        manifest: { routes: {} },
+        dehydratedData: {}
+      };
     </script>
     <link rel="stylesheet" href="/assets/${cssFile}">
 </head>
@@ -45,4 +51,4 @@ const htmlContent = `<!DOCTYPE html>
 </html>`;
 
 fs.writeFileSync(path.join(clientDir, 'index.html'), htmlContent, 'utf8');
-console.log('Successfully generated dist/client/index.html with $_TSR.h function mock', { cssFile, jsFile });
+console.log('Successfully generated dist/client/index.html with $_TSR router and h mock', { cssFile, jsFile });
