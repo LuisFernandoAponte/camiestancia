@@ -5,9 +5,10 @@ import { routeTree } from "./routeTree.gen";
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchInterval: 4000, // Sync DB data every 4 seconds in real time
-      refetchOnWindowFocus: true,
-      staleTime: 2000,
+      refetchInterval: false, // Evita polling global constante cada 4s
+      refetchOnWindowFocus: false, // Evita peticiones duplicadas al cambiar de pestaña
+      staleTime: 1000 * 60, // Considera datos frescos por 1 minuto
+      gcTime: 1000 * 60 * 10, // Mantiene en memoria caché por 10 minutos
     },
   },
 });
